@@ -10,13 +10,13 @@ import './config/passport.js';
 
 
 const app = express();
-const port = process.env.PORT || 8089;
+const port = process.env.PORT || 6069;
 const ATLAS =  process.env.MongoDB_ATLAS
 app.use(session({
     secret: 'fitaf secret',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({mongoUrl: "mongodb://localhost/fitafDB", collectionName: "sessions" } ),
+    store: MongoStore.create({mongoUrl:"mongodb+srv://FITAFHouse:z7IVKotQfLySsVEl@investment.5o7ix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", collectionName: "sessions" } ),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
