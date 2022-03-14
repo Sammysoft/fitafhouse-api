@@ -6,6 +6,12 @@ import userRouter from './routes/user.route.js';
 import MongoStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import './config/passport.js';
 
 
@@ -41,6 +47,9 @@ app.listen(port, ()=>{
     console.log(`Server running on port ${port}`)
     _connectDB();
 });
+app.get('/', (req,res,next)=>{
+    res.status(200).sendFile(path.join(__dirname, '/index.html'));
 
+})
 app.use('/api', userRouter);
 
