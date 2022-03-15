@@ -8,6 +8,7 @@ export const auth = {
         const { username,password } = req.body;
         const user = await User.findOne({username: username})
         if(user === null){
+            console.log('error')
              res.status(400).json({msg: 'Unregistered Account'})
         }else{
         user

@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
+    phonenumber:{type:Number, required: true},
     investment: new mongoose.Schema({
         plan: {String, default: ''},
         timeDue: {String},

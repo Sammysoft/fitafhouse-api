@@ -27,7 +27,8 @@ export const userController = {
                             }
                 },
                _invest: async(req,res,next)=>{
-                        const user = await User.findById()
+                        const user = await User.findById({_id: req.params.id});
+                         console.log(user)
                }
 
 }
