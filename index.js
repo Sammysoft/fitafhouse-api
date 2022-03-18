@@ -3,6 +3,7 @@ import passport from 'passport';
 import   _connectDB    from './config/db.js';
 import session from 'express-session';
 import userRouter from './routes/user.route.js';
+import adminRouter from './routes/admin-route.js';
 import MongoStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -52,4 +53,5 @@ app.get('/', (req,res,next)=>{
 
 })
 app.use('/api', userRouter);
+app.use('/api', adminRouter);
 

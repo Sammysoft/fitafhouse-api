@@ -13,5 +13,5 @@ userRouter.get('/dashboard', passport.authenticate('jwt', {session: false}), (re
     })
 })
 
-userRouter.get('/invest/:id', userController._invest)
+userRouter.post('/invest/:id', userController._invest)
 export default userRouter;

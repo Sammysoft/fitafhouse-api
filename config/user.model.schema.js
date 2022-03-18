@@ -1,5 +1,19 @@
 import mongoose from "mongoose";
 
+const investmentSchema = mongoose.Schema({
+    plan:{
+        type: String
+    },
+    timeDue: {
+        type: String
+    },
+    amount:{
+        type: String
+    },
+    rate: {
+        type: String
+    }
+}, {timestamps: true})
 
 const userSchema = new mongoose.Schema({
     fullname: {
@@ -19,10 +33,11 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     phonenumber:{type:Number, required: true},
-    investment: new mongoose.Schema({
-        plan: {String, default: ''},
-        timeDue: {String},
-        amount: {String}})
+    investment: [investmentSchema],
+    role:{
+        type: String,
+        default: 'Investor'
+    }
 }, {
     timestamps: true
 })

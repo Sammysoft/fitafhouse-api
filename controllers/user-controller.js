@@ -27,8 +27,25 @@ export const userController = {
                             }
                 },
                _invest: async(req,res,next)=>{
-                        const user = await User.findById({_id: req.params.id});
-                         console.log(user)
+                  try {
+                    User.findById({_id: req.params.id},(err, user)=>{
+                        const invest= req.body;
+                         user.investment.push(invest);
+                        user.save()
+                       User.findById({_id: req.params.id}, (err, result)=>{
+                           console.log(result)
+                           if(!err){
+                               res.status(200).json({
+                                   investmentData: result.investment
+                               })
+                           }
+                       } )
+                    } );
+                  } catch (error) {
+                            res.status(400).json({
+                                msg : 'Sorry, Could not make this investment'
+                            })
+                  }
                }
 
 }
