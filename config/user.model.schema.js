@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 
 const investmentSchema = mongoose.Schema({
     plan:{
-        type: String
+        type: String,
     },
     timeDue: {
-        type: String
+        type: String,
     },
     amount:{
-        type: String
+        type: String,
     },
     rate: {
-        type: String
+        type: String,
     }
 }, {timestamps: true})
 
@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema({
     role:{
         type: String,
         default: 'Investor'
+    },
+    isActive:{
+        type: Boolean
     }
 }, {
     timestamps: true

@@ -29,14 +29,17 @@ export const userController = {
                _invest: async(req,res,next)=>{
                   try {
                     User.findById({_id: req.params.id},(err, user)=>{
-                        const invest= req.body;
-                         user.investment.push(invest);
-                        user.save()
-                       User.findById({_id: req.params.id}, (err, result)=>{
+                        const {plan, timeDue, rate, amount , isActive} = req.body;
+                        console.log(isActive)
+                        const investmentDetails = {plan, timeDue, rate, amount}
+
+                         user.investment.push(investmentDetails);
+                         user.save()
+                       User.findByIdAndUpdate(req.params.id, {$set: {isActive: true}},(err, result)=>{
                            console.log(result)
                            if(!err){
                                res.status(200).json({
-                                   investmentData: result.investment
+                                   result
                                })
                            }
                        } )
@@ -47,21 +50,6 @@ export const userController = {
                             })
                   }
                },
-               _getNumberOfUsers: async(req,res,next)=>{
-                        const numberOfUsers = await User.find().count({})
-                                    res.status(200).json({
-                                        numberOfUsers
-                                    })
-
-               },
-               _getStats: async(req,res,next)=>{
-                   const numberOfNonActiveInvestors = await User.where({investment: []}).count()
-                   const numberOfUsers = await User.find().count({})
-                   const numberOfActiveInvestors = numberOfUsers - numberOfNonActiveInvestors
-                   res.status(200).json({
-                       numberOfActiveInvestors: numberOfActiveInvestors,
-                       numberOfUsers: numberOfUsers
-                   })
-               }
+         
 
 }

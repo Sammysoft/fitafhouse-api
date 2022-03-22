@@ -14,6 +14,6 @@ userRouter.get('/dashboard', passport.authenticate('jwt', {session: false}), (re
 })
 
 userRouter.post('/invest/:id', userController._invest)
-userRouter.get('/users', userController._getNumberOfUsers)
-userRouter.get('/stats', userController._getStats)
+
+
 export default userRouter;
