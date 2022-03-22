@@ -2,7 +2,7 @@ import User from "../config/user.model.schema.js"
 
 export const adminController ={
 
- 
+
 
     _deleteInvestor: async(req,res,next)=>{
         User.findOneAndDelete({_id: req.params.id}, (err, result)=>{
@@ -21,7 +21,7 @@ export const adminController ={
         try {
             const users = await User.find({role: 'Investor'})
             res.status(200).json({
-                users
+                users: users
             })
         } catch (error) {
             res.status(400).json({
