@@ -46,6 +46,22 @@ export const userController = {
                                 msg : 'Sorry, Could not make this investment'
                             })
                   }
+               },
+               _getNumberOfUsers: async(req,res,next)=>{
+                        const numberOfUsers = await User.find().count({})
+                                    res.status(200).json({
+                                        numberOfUsers
+                                    })
+
+               },
+               _getStats: async(req,res,next)=>{
+                   const numberOfNonActiveInvestors = await User.where({investment: []}).count()
+                   const numberOfUsers = await User.find().count({})
+                   const numberOfActiveInvestors = numberOfUsers - numberOfNonActiveInvestors
+                   res.status(200).json({
+                       numberOfActiveInvestors: numberOfActiveInvestors,
+                       numberOfUsers: numberOfUsers
+                   })
                }
 
 }

@@ -10,12 +10,13 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import './config/passport.js';
 
-
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 6069;
 const ATLAS =  process.env.MongoDB_ATLAS
@@ -23,7 +24,7 @@ app.use(session({
     secret: 'fitaf secret',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({mongoUrl:"mongodb+srv://FITAFHouse:z7IVKotQfLySsVEl@investment.5o7ix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", collectionName: "sessions" } ),
+    store: MongoStore.create({mongoUrl:process.env.MongoDB_ATLAS, collectionName: "sessions" } ),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
