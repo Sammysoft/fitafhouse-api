@@ -17,11 +17,12 @@ export const adminController ={
                 })
             }
         })
-    },      _getUsers: async(req,res,next)=>{
+    },
+    _getUsers: async(req,res,next)=>{
         try {
-            const users = await User.find({role: 'Investor'})
+            const users = await User.find()
             res.status(200).json({
-                users: users
+                Investors: users
             })
         } catch (error) {
             res.status(400).json({

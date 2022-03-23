@@ -29,10 +29,12 @@ export const userController = {
                _invest: async(req,res,next)=>{
                   try {
                     User.findById({_id: req.params.id},(err, user)=>{
-                        const {plan, timeDue, rate, amount , isActive} = req.body;
+                        const {plan, investmentDuration, rate, amount , isActive} = req.body;
                         console.log(isActive)
-                        const investmentDetails = {plan, timeDue, rate, amount}
-
+                        const dueDate = user.endDate(investmentDuration);
+                        const investmentDetails = {plan, investmentDuration, rate, amount, dueDate}
+                        console.log(investmentDuration)
+                         console.log(dueDate)
                          user.investment.push(investmentDetails);
                          user.save()
                        User.findByIdAndUpdate(req.params.id, {$set: {isActive: true}},(err, result)=>{
@@ -50,6 +52,6 @@ export const userController = {
                             })
                   }
                },
-         
+
 
 }
