@@ -22,7 +22,7 @@ export const adminController ={
         try {
             const users = await User.find()
             res.status(200).json({
-                Investors: users
+                    Investors:  users
             })
         } catch (error) {
             res.status(400).json({
