@@ -32,9 +32,9 @@ export const adminController ={
 
 },
 _getStats: async(req,res,next)=>{
-   const numberOfNonActiveInvestors = await User.where({investment: []}).count()
-   const numberOfUsers = await User.find().count({})
-   const numberOfActiveInvestors = numberOfUsers - numberOfNonActiveInvestors
+   const numberOfActiveInvestors = await User.where({isActive: true}).count()
+  const numberOfUsers = await User.find().count({})
+//    const numberOfActiveInvestors = numberOfUsers - numberOfNonActiveInvestors
    res.status(200).json({
        numberOfActiveInvestors: numberOfActiveInvestors,
        numberOfUsers: numberOfUsers
@@ -49,5 +49,20 @@ _getActiveInvestors: async(req,res,next)=>{
             investors
         })
 },
+_approveInvestment: async(req,res,next)=>{
+    try {
+User.findByIdAndUpdate(req.params.id, {$set: {approved: true}}, (err, result)=>{
+    !err
+    res.status(200).json({
+        msg: 'Investment has been approved'
+    })
+})
+
+    } catch (error) {
+         res.status(400).json({
+             msg: 'Investment Could not be approved'
+         })
+    }
+}
 }
 

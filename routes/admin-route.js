@@ -8,6 +8,7 @@ adminRouter.post('/delete/:id',adminController._deleteInvestor, );
 adminRouter.get('/users', adminController._getUsers)
 adminRouter.get('/stats', adminController._getStats)
 adminRouter.get('/active-investors', adminController._getActiveInvestors)
+adminRouter.post('/approve/:id', adminController._approveInvestment)
 
 
 export default adminRouter;

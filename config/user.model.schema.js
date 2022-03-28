@@ -26,13 +26,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    phonenumber:{type:Number, required: true},
+    phonenumber:{
+        type:Number,
+        required: true
+    },
     investment: [
-        {plan:{type: String}, investmentDuration: {type: Number},amount:{type: String},rate: {type: String},
+        {plan:{type: String},
+        investmentDuration: {type: Number},
+        amount:{type: String},
+        rate: {type: String},
         created_at: {
             type: String,
             default: presentDate
-        }, dueDate: {
+        },
+        dueDate: {
             type: String
         }}
     ],
@@ -41,6 +48,9 @@ const userSchema = new mongoose.Schema({
         default: 'Investor'
     },
     isActive:{
+        type: Boolean
+    },
+    approved:{
         type: Boolean
     },
     accountnumber: {
