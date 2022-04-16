@@ -14,6 +14,6 @@ userRouter.get('/dashboard', passport.authenticate('jwt', {session: false}), (re
 })
 
 userRouter.post('/invest/:id', userController._invest)
-
+userRouter.get('/notifications/:id', userController._notifications)
 
 export default userRouter;

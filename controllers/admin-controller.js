@@ -63,6 +63,30 @@ User.findByIdAndUpdate(req.params.id, {$set: {approved: true}}, (err, result)=>{
              msg: 'Investment Could not be approved'
          })
     }
+},
+_notifyInvestor: async(req,res,next)=>{
+    const investor = await User.findById(req.params.id);
+    const { message } = req.body;
+    console.log(req.body)
+    const notifyInvestor = await User.findByIdAndUpdate({_id: req.params.id}, {$set: {notification: message}})
+    try {
+        if(notifyInvestor) return res.status(200).json({msg: 'Notification Sent to @' + investor.username})
+    } catch (error) {
+        res.status(400).json({ msg: "Could not send notification" })
+    }
+},
+
+_notifyInvestors: async(req,res,next)=>{
+    const { message } = req.body
+  try {
+    const investor  =  await User.updateMany({isActive: true}, {notification: message});
+    console.log(investor)
+
+       res.status(400).json({msg: 'All investors has been notified!'})
+  } catch (error) {
+        res.status(400).json({msg: 'Could not initiate bulk notification'})
+  }
+
 }
 }
 

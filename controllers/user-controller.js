@@ -57,4 +57,18 @@ export const userController = {
                             })
                   }
                },
+
+               _notifications: async(req,res,next)=>{
+
+                   try {
+                    const notification = await User.findById(req.params.id)
+                    res.status(200).json({
+                        notification: notification.notification
+                    })
+                   } catch (error) {
+                    res.status(400).json({
+                        msg: "Could not get notifications"
+                    })
+                   }
+               }
 }

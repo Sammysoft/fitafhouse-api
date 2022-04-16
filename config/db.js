@@ -6,7 +6,7 @@ import  mongoose  from 'mongoose';
                 try {
                     dotenv.config();
                     const MongoURL = process.env.MongoDB_ATLAS
-               await  mongoose.connect(process.env.MongoDB_ATLAS, { useNewUrlParser: true })
+               await  mongoose.connect(process.env.MongoDB, { useNewUrlParser: true })
                 .then(()=>{
                     console.log("Connected to Database")
                 })

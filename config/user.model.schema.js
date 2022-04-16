@@ -2,10 +2,7 @@ import mongoose from "mongoose";
 
 
 const date= new Date();
-let month =
-["January","February","March","April","May","June","July","August","September","October","November","December"]
-
-let presentDate = `${date.getDate()} ${month[date.getMonth()]} ${date.getFullYear()}`
+let presentDate = `0${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`
 
 
 
@@ -58,7 +55,8 @@ const userSchema = new mongoose.Schema({
     },
    bank:{
        type: String
-   }
+   },
+   notification:{type: String, default: 'Hey there, Welcome to FITAFHOUSE'}
 }, {
     timestamps: true
 })
@@ -69,15 +67,14 @@ userSchema.methods.endDate = function endDate(investmentDuration){
     month =
         ["January","February","March","April","May","June","July","August","September","October","November","December"]
    extractedMonth = date.getMonth();
-   newMonth = Number(extractedMonth) + Number(investmentDuration);
+   newMonth = Number(extractedMonth) + Number(investmentDuration) + Number(1);
     if(newMonth >= 12){
         newMonth -= 12
         finalMonth = month[newMonth]
-            dueDate = `${date.getDate()} ${finalMonth} ${date.getFullYear() + 1}`
+            dueDate = `0${newMonth}/${date.getDate()}/${date.getFullYear() + 1}`
             return dueDate;
     }else{
-        newMonth = month[newMonth]
-        dueDate = `${date.getDate()} ${newMonth} ${date.getFullYear()}`
+        dueDate = `0${newMonth}/${date.getDate()}/${date.getFullYear()}`
         return dueDate;
     }
 

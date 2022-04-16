@@ -24,7 +24,7 @@ app.use(session({
     secret: 'fitaf secret',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({mongoUrl:process.env.MongoDB_ATLAS, collectionName: "sessions" } ),
+    store: MongoStore.create({mongoUrl:process.env.MongoDB, collectionName: "sessions" } ),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors());
 
 app.listen(port, ()=>{
-    console.log(`Server running on port ${port}`)
+    console.log(`Server running on http://localhost:${port}`)
     _connectDB();
 });
 app.get('/', (req,res,next)=>{
